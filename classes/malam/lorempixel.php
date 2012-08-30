@@ -39,6 +39,7 @@ abstract class Malam_Lorempixel
     {
         $this->width($width);
         $this->height($height);
+        $this->gray($gray);
     }
 
     public function protocol($protocol = 'http')
