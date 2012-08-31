@@ -12,7 +12,7 @@ abstract class Malam_Lorempixel
 
     protected
         $_attributes        = NULL,
-        $_url_only          = FALSE,
+        $_uri_only          = FALSE,
         $_protocol          = 'http',
         $_valid_category    = array(
             'abstract',     'nightlife',    'nature',
@@ -28,7 +28,7 @@ abstract class Malam_Lorempixel
         $_image_text,
         $_image_category,
         $_image_number,
-        $_image_url;
+        $_image_uri;
 
     public static function factory($width, $height, $gray = FALSE)
     {
@@ -56,7 +56,7 @@ abstract class Malam_Lorempixel
 
     public function url_only($bool)
     {
-        $this->_url_only = (bool) $bool;
+        $this->_uri_only = (bool) $bool;
         return $this;
     }
 
@@ -141,7 +141,7 @@ abstract class Malam_Lorempixel
 
     public function render()
     {
-        $this->_image_url = __(Lorempixel::LPX_PATH, array(
+        $this->_image_uri = __(Lorempixel::LPX_PATH, array(
             ':width'    => $this->_image_width,
             ':height'   => $this->_image_height,
             ':gray'     => $this->_image_gray,
@@ -152,17 +152,17 @@ abstract class Malam_Lorempixel
         $this->_append('_image_number');
         $this->_append('_image_text');
 
-        if (TRUE === $this->_url_only)
-            return $this->_image_url;
+        if (TRUE === $this->_uri_only)
+            return $this->_image_uri;
 
-        return HTML::image($this->_image_url, $this->_attributes);
+        return HTML::image($this->_image_uri, $this->_attributes);
     }
 
     private function _append($property)
     {
         if (! empty($this->$property))
         {
-            $this->_image_url .= "{$this->$property}/";
+            $this->_image_uri .= "{$this->$property}/";
         }
     }
 
