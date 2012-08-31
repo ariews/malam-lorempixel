@@ -119,7 +119,7 @@ abstract class Malam_Lorempixel
     {
         if (empty($this->_image_category))
         {
-            $this->category(Arr::random_pick($this->_valid_category));
+            $this->category(Lorempixel::random_pick($this->_valid_category));
         }
 
         return $this;
@@ -169,5 +169,13 @@ abstract class Malam_Lorempixel
     public function __toString()
     {
         return $this->render();
+    }
+
+    public static function random_pick(array $array, $num = 1)
+    {
+        $keys   = array_rand($array, $num);
+        $method = (!is_array($keys)) ? 'get' : 'extract';
+
+        return Arr::$method($array, $keys);
     }
 }
