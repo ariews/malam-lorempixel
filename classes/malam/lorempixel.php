@@ -54,7 +54,7 @@ abstract class Malam_Lorempixel
         return $this->protocol('https');
     }
 
-    public function url_only($bool)
+    public function uri_only($bool)
     {
         $this->_uri_only = (bool) $bool;
         return $this;
