@@ -68,7 +68,7 @@ abstract class Malam_Lorempixel
 
     public function width($width)
     {
-        $this->_not_null_or_zero($width, 'width');
+        $this->_size_check($width, 'width');
 
         $this->_image_width = $width;
         return $this;
@@ -76,16 +76,21 @@ abstract class Malam_Lorempixel
 
     public function height($height)
     {
-        $this->_not_null_or_zero($height, 'height');
+        $this->_size_check($height, 'height');
 
         $this->_image_height = $height;
         return $this;
     }
 
-    private function _not_null_or_zero($check, $field)
+    private function _size_check($check, $field, $check_max_value = TRUE)
     {
         if (NULL == $check || 0 >= $check)
             throw new Kohana_Exception(':field should be greater than 0', array(
+                ':field' => $field
+            ));
+
+        if (TRUE === $check_max_value && 1920 < $check)
+            throw new Kohana_Exception(':field should be less than 1920', array(
                 ':field' => $field
             ));
     }
@@ -127,7 +132,7 @@ abstract class Malam_Lorempixel
 
     public function number($number)
     {
-        $this->_not_null_or_zero($number, 'number');
+        $this->_size_check($number, 'number', FALSE);
 
         if ($number < 10)
         {
